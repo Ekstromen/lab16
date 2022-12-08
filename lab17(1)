@@ -1,0 +1,80 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+#define N 50
+
+void sort_buble(int* ptrarr);
+void sort_buble(int* ptrarr);
+void sort_select(int* ptrarr);
+void sort_insert(int* ptrarr);
+
+int main(){
+	int array[N];
+	for (int i = 0; i < N; i++) {
+		array[i] = rand() % 100;
+	}
+	
+	put_array(array);
+	printf("\n");
+	sort_buble(array);
+	put_array(array);
+	printf("\n");
+	sort_select(array);
+	put_array(array);
+	printf("\n");
+	sort_insert(array);
+	put_array(array);
+}
+
+int put_array(int* array) {
+	for (int i = 0; i < N; i++) {
+		printf("%d \n", array[i]);
+	}
+}
+
+void sort_buble(int* ptrarr) {
+	int k = 0;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if (ptrarr[j] > ptrarr[i]) {
+				k = ptrarr[i];
+				ptrarr[i] = ptrarr[j];
+				ptrarr[j] = k;
+			}
+		}
+	}
+}
+
+void sort_select(int* ptrarr) { 
+	int k = N;
+
+	for (int j = 0; j < k; j++) {
+		int max = ptrarr[0], nom = 0;
+		for (int i = 0; i < k-1; i++) {
+			if (ptrarr[i] > max) {
+				//max = ptrarr[i];
+				nom = i;
+			}
+		
+			int b = ptrarr[k-1];
+			ptrarr[k - 1] = ptrarr[nom];
+			ptrarr[nom] = b;
+			k--;
+		}
+	}
+}
+
+void sort_insert(int* ptrarr) {
+	int n = N;
+	for (int i = 0; i < n; i++) {
+		int temp = ptrarr[i];
+		int j = i;
+		while (ptrarr[j - 1] > temp && j > 0) {
+			ptrarr[j] = ptrarr[j - 1];
+			j = j - 1;
+		}
+		ptrarr[j] = temp;
+	}
+}
