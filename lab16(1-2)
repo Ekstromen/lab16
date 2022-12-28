@@ -47,7 +47,6 @@ int main()
 		{
 		case 1:
 			put_elements(array, size);
-			put_elements(calcarray, size);
 			break;
 		case 2:
 			calcarray = calc_elements(array, size);
@@ -63,7 +62,7 @@ int main()
 		case 4:
 			printf("Введите значние элемента массива для поиска его индекса\n");
 			scanf("%f", &c);
-			printf("%d \n", find_element(calcarray, size, c));
+			printf("%d \n", find_element(array, size, c));
 			break;
 		case 5:
 			printf("Введите 2 для поиска максимального значения на четных позициях или введите 1 для поиска максимального значения на нечетных позициях\n");
@@ -93,6 +92,7 @@ int main()
 		case 0:
 			free(array);
 			free(calcarray);
+			break;
 		default:
 			break;
 		}
@@ -151,7 +151,7 @@ int find_element(double* ptr_array, int n, double element)
 {
 	for (int i = 0; i < n; i++)
 	{
-		if (ptr_array[i] == element)
+		if (ptr_array[i] < element + 0.1 && ptr_array[i] > element - 0.1)
 		{
 			return i;
 		}
@@ -190,9 +190,9 @@ int delete_n(double* ptr_array, int size)
 	{
 		if (ptr_array[i] < 0)
 		{
-			int k = size - 1;
-			for (int i = 0; i < (size); i++)  ptr_array[i+1] = ptr_array[i + 2];
-			return k;
+			for (int j = i; j < size; j++)
+			 ptr_array[j] = ptr_array[j + 1]; 
+			size--;
 		}
 	}
 }
